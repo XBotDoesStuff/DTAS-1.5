@@ -1,6 +1,11 @@
 extends CharacterBody2D
 
-@export var speed = 400
+@export var speed = 800
+@export var dash_speed = 2500
+@export var dash_length = 0.2
+var dash_vector
+var is_dashing = false
+
 var screen_size
 var mouse_pos
 
@@ -9,14 +14,20 @@ func _ready() -> void:
 	screen_size = get_viewport_rect().size
 
 func get_input():
-	var input_dir = Input.get_vector("move_left", "move_right", "move_up", "move_down")
-	velocity = input_dir * speed
+	return Input.get_vector("move_left", "move_right", "move_up", "move_down")
 
 func _physics_process(delta: float) -> void:
-	get_input()
+	if is_dashing:
+		velocity = dash_vector * dash_speed
+	else:
+		velocity = get_input() * speed
 	move_and_slide()
 
 func _process(delta: float) -> void:
+	# Dash if space is pressed
+	if Input.is_action_just_pressed("dash"):
+			dash()
+	
 	# Decide whether to play animation
 	if velocity.length() > 0:
 		$AnimatedSprite2D.play()
@@ -26,3 +37,14 @@ func _process(delta: float) -> void:
 	# Look at mouse
 	mouse_pos = get_global_mouse_position()
 	look_at(mouse_pos)
+
+# Gets the current vector of the player and dashes
+func dash():
+	print("dashing...")
+	is_dashing = true
+	dash_vector = get_input()
+	$DashTimer.wait_time = dash_length
+	$DashTimer.start()
+
+func _on_dash_timer_timeout() -> void:
+	is_dashing = false
