@@ -19,6 +19,12 @@ config/icon="res://icon.svg"
 
 window/stretch/mode="canvas_items"
 
+[global_group]
+
+player=""
+enemyProjectile=""
+allyProjectile=""
+
 [input]
 
 move_left={

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://pp6hsabsp20n"]
+[gd_scene load_steps=5 format=3 uid="uid://pp6hsabsp20n"]
 
 [ext_resource type="PackedScene" uid="uid://yd4kiqyhmuvt" path="res://Scenes/Player/Player.tscn" id="1_euc4a"]
 [ext_resource type="Texture2D" uid="uid://b3t031con5vbs" path="res://icon.svg" id="2_bjukw"]
+[ext_resource type="PackedScene" uid="uid://dmnbhkyedbr8s" path="res://Scenes/Projectiles/Player HVBP.tscn" id="3_xu3v5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xu3v5"]
 size = Vector2(128.8004, 128)
@@ -35,3 +36,11 @@ shape = SubResource("RectangleShape2D_xu3v5")
 
 [node name="Sprite2D" type="Sprite2D" parent="Wall2"]
 texture = ExtResource("2_bjukw")
+
+[node name="PlayerHvbp" parent="." instance=ExtResource("3_xu3v5")]
+position = Vector2(666, 201)
+rotation = 1.097812
+
+[node name="PlayerHvbp2" parent="." instance=ExtResource("3_xu3v5")]
+position = Vector2(591, 428)
+rotation = -1.7261306

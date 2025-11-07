@@ -1,10 +1,23 @@
 extends CharacterBody2D
 
-@export var speed = 800
-@export var dash_speed = 2500
+@export_category("Movement")
+@export var speed = 800.0
+@export var dash_speed = 2500.0
 @export var dash_length = 0.2
 var dash_vector
 var is_dashing = false
+
+@export_category("Combat")
+@export var atk_cooldown = 0.1
+var max_hp = 100
+var hp = 100
+
+@export_category("Hunger")
+@export var hunger_drain : float
+var max_hunger
+var hunger
+
+@export var hvbp_scene : PackedScene
 
 var screen_size
 var mouse_pos
@@ -37,6 +50,10 @@ func _process(delta: float) -> void:
 	# Look at mouse
 	mouse_pos = get_global_mouse_position()
 	look_at(mouse_pos)
+	
+	if not is_dashing:
+		if Input.is_action_pressed("fire"):
+			fire_hvbp()
 
 # Gets the current vector of the player and dashes
 func dash():
@@ -48,3 +65,11 @@ func dash():
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
+
+func fire_hvbp():
+	if $AtkTimer.time_left == 0:
+		$AtkTimer.wait_time = atk_cooldown
+		$AtkTimer.start()
+		var hvbp_instance = hvbp_scene.instantiate()
+		owner.add_child(hvbp_instance)
+		hvbp_instance.transform = $Muzzle.global_transform

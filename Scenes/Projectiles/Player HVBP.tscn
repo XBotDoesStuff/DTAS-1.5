@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dmnbhkyedbr8s"]
+
+[ext_resource type="Script" uid="uid://cegyxtg45iaos" path="res://Scripts/player_hvbp.gd" id="1_y63gp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_molib"]
+size = Vector2(15, 15)
+
+[sub_resource type="Gradient" id="Gradient_y63gp"]
+colors = PackedColorArray(0, 0.78431374, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aa866"]
+gradient = SubResource("Gradient_y63gp")
+width = 15
+height = 15
+
+[node name="PlayerHvbp" type="Area2D" groups=["allyProjectile"]]
+script = ExtResource("1_y63gp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_molib")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_aa866")
+
+[node name="TtlTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="TtlTimer" to="." method="_on_ttl_timer_timeout"]
