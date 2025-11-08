@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b1ma70blcw5y1"
-path="res://.godot/imported/pixil-layer-2.png-92c1b9e3bb73645023c53184cd1a29af.ctex"
+uid="uid://caod4ageyp1s"
+path="res://.godot/imported/pixil-layer-1.png-2b07352cf88b68f1bacc4ba1a3123055.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Player/Sprites/Walking/pixil-layer-2.png"
-dest_files=["res://.godot/imported/pixil-layer-2.png-92c1b9e3bb73645023c53184cd1a29af.ctex"]
+source_file="res://Sprites/Player/Walking/pixil-layer-1.png"
+dest_files=["res://.godot/imported/pixil-layer-1.png-2b07352cf88b68f1bacc4ba1a3123055.ctex"]
 
 [params]
 

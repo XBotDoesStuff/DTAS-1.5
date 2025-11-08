@@ -1,10 +1,56 @@
-[gd_scene load_steps=8 format=3 uid="uid://yd4kiqyhmuvt"]
+[gd_scene load_steps=13 format=3 uid="uid://yd4kiqyhmuvt"]
 
-[ext_resource type="Texture2D" uid="uid://b1ma70blcw5y1" path="res://Scenes/Player/Sprites/Walking/pixil-layer-2.png" id="1_h54ih"]
+[ext_resource type="Texture2D" uid="uid://b1ma70blcw5y1" path="res://Sprites/Player/Walking/pixil-layer-2.png" id="1_h54ih"]
 [ext_resource type="Script" uid="uid://cyv1wg80hcgnl" path="res://Scripts/player.gd" id="1_ude3g"]
-[ext_resource type="PackedScene" uid="uid://dmnbhkyedbr8s" path="res://Scenes/Projectiles/Player HVBP.tscn" id="2_jmcll"]
-[ext_resource type="Texture2D" uid="uid://b03oyivfutyrv" path="res://Scenes/Player/Sprites/Walking/pixil-layer-0.png" id="2_ude3g"]
-[ext_resource type="Texture2D" uid="uid://caod4ageyp1s" path="res://Scenes/Player/Sprites/Walking/pixil-layer-1.png" id="3_jmcll"]
+[ext_resource type="Texture2D" uid="uid://b03oyivfutyrv" path="res://Sprites/Player/Walking/pixil-layer-0.png" id="2_ude3g"]
+[ext_resource type="Texture2D" uid="uid://caod4ageyp1s" path="res://Sprites/Player/Walking/pixil-layer-1.png" id="3_jmcll"]
+[ext_resource type="Script" uid="uid://d3gkkwrw3xwok" path="res://Scripts/Weapons/player_weapons.gd" id="5_jmcll"]
+
+[sub_resource type="GDScript" id="GDScript_ude3g"]
+script/source = "extends Area2D
+
+@export var bullet_speed = 1000
+@export var time_to_live = 5
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _ready() -> void:
+	$TtlTimer.wait_time = time_to_live
+	$TtlTimer.start()
+
+func _process(delta: float) -> void:
+	position += transform.x * bullet_speed * delta
+
+func _on_body_entered(body: Node2D) -> void:
+	if not body.is_in_group(\"player\"):
+		queue_free()
+
+func _on_ttl_timer_timeout() -> void:
+	queue_free()
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_molib"]
+size = Vector2(15, 15)
+
+[sub_resource type="Gradient" id="Gradient_y63gp"]
+colors = PackedColorArray(0, 0.78431374, 0, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_aa866"]
+gradient = SubResource("Gradient_y63gp")
+width = 15
+height = 15
+
+[sub_resource type="PackedScene" id="PackedScene_jmcll"]
+_bundled = {
+"conn_count": 2,
+"conns": PackedInt32Array(1073741828, 1073741827, 14, 13, 2, 0, 0, 1073741830, 1073741829, 16, 15, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("PlayerHvbp", "Area2D", "allyProjectile", "script", "CollisionShape2D", "CollisionShape2D", "shape", "Sprite2D", "Sprite2D", "texture", "TtlTimer", "Timer", "one_shot", "_on_body_entered", "body_entered", "_on_ttl_timer_timeout", "timeout"),
+"node_count": 4,
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("TtlTimer")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 3, 0, 1, 2, 1073741824, 0, 5, 4, -1, 1, 6, 1, 0, 1073741825, 0, 8, 7, -1, 1, 9, 2, 0, 1073741826, 0, 11, 10, -1, 1, 12, 3, 0),
+"variants": [SubResource("GDScript_ude3g"), SubResource("RectangleShape2D_molib"), SubResource("GradientTexture2D_aa866"), true],
+"version": 3
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l3ax4"]
 size = Vector2(65, 20)
@@ -31,7 +77,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_ude3g")
-hvbp_scene = ExtResource("2_jmcll")
+hvbp_scene = SubResource("PackedScene_jmcll")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(2.5, 0)
@@ -51,10 +97,8 @@ speed_scale = 2.0
 [node name="DashTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="Muzzle" type="Marker2D" parent="."]
-position = Vector2(35, 0)
-
-[node name="AtkTimer" type="Timer" parent="."]
-one_shot = true
+[node name="PlayerWeapons" type="Node2D" parent="."]
+position = Vector2(8, 15)
+script = ExtResource("5_jmcll")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
