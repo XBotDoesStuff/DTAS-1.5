@@ -16,6 +16,7 @@ func _process(delta: float) -> void:
 	pass
 
 func equip_weapon(weapon_scene : PackedScene):
+	print("equipping " + str(weapon_scene))
 	# If the player has a primary but no seconday, moves the primary to the secondary slot
 	if current_weapon and not secondary_weapon:
 		current_weapon = secondary_weapon

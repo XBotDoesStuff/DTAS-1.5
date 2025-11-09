@@ -1,15 +1,21 @@
 class_name RangedWeapon
 extends Weapon
 
-@export var proj_time_to_live : float
 @export var pierce : float
 @export var proj_amount : int
+@export var proj_scene : PackedScene
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@onready var muzzle = get_node("Muzzle")
 
+func _use():
+	var projectile = proj_scene.instantiate()
+	add_sibling(projectile)
+	if muzzle:
+		projectile.transform = muzzle.global_transform
+	else:
+		projectile.transform = global_transform
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	super._process(delta)
+	if muzzle:
+		muzzle.look_at(get_global_mouse_position())

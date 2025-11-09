@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b4wlpr205uaq6"]
+
+[ext_resource type="Script" uid="uid://dymrlfjeblahb" path="res://Scripts/Projectiles/projectile.gd" id="1_mkmgv"]
+
+[sub_resource type="Gradient" id="Gradient_pvha6"]
+colors = PackedColorArray(0.3529412, 0.3529412, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mkmgv"]
+gradient = SubResource("Gradient_pvha6")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uu5gj"]
+size = Vector2(17, 6)
+
+[node name="PlayerHvbp" type="CharacterBody2D" groups=["allyProjectile"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_mkmgv")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.50000036, 0)
+scale = Vector2(0.265625, 0.09375)
+texture = SubResource("GradientTexture2D_mkmgv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_uu5gj")

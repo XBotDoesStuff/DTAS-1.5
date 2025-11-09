@@ -6,13 +6,15 @@ extends Node2D
 @export var knockback : float
 @export var hunger_cost : int
 
-@export var weapon_scene : PackedScene
+var weapon_scene = load(get_path())
 
 var last_used_time : float
 var can_use : bool = true
 
 func _process(delta: float) -> void:
-	pass
+	if Input.is_action_pressed("fire"):
+		_try_use()
+	look_at(get_global_mouse_position())
 
 func _equip():
 	pass
