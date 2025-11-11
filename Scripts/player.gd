@@ -17,8 +17,6 @@ var hp = 100
 var max_hunger
 var hunger
 
-@export var hvbp_scene : PackedScene
-
 var screen_size
 var mouse_pos
 
@@ -50,10 +48,6 @@ func _process(delta: float) -> void:
 	# Look at mouse
 	mouse_pos = get_global_mouse_position()
 	look_at(mouse_pos)
-	
-	if not is_dashing:
-		if Input.is_action_pressed("fire"):
-			fire_hvbp()
 
 # Gets the current vector of the player and dashes
 func dash():
@@ -65,11 +59,3 @@ func dash():
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
-
-func fire_hvbp():
-	if $AtkTimer.time_left == 0:
-		$AtkTimer.wait_time = atk_cooldown
-		$AtkTimer.start()
-		var hvbp_instance = hvbp_scene.instantiate()
-		owner.add_child(hvbp_instance)
-		hvbp_instance.transform = $Muzzle.global_transform

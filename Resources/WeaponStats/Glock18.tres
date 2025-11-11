@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="WeaponStats" load_steps=4 format=3 uid="uid://5grpepesfu4i"]
+
+[ext_resource type="Script" uid="uid://4hexwyotsioq" path="res://Scripts/weaponStats.gd" id="1_ol4di"]
+[ext_resource type="Texture2D" uid="uid://daowwkard5kje" path="res://Sprites/Weapons/glock18.png" id="2_jr1fp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5b51p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jr1fp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[resource]
+script = ExtResource("1_ol4di")
+sprite = SubResource("SpriteFrames_5b51p")
+proj_count = 1
+proj_force = 1.0
+proj_range = 1000.0
+damage = 10.0
+fire_rate = 0.05
+metadata/_custom_type_script = "uid://4hexwyotsioq"
