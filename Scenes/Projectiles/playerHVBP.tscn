@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://fj1yytrj7p2b"]
+
+[ext_resource type="Texture2D" uid="uid://qq2b6hs57ntr" path="res://Sprites/Projectiles/hvbp.png" id="1_dd45t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_36ovt"]
+radius = 17.0
+
+[node name="PlayerHvbp" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_36ovt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_dd45t")
