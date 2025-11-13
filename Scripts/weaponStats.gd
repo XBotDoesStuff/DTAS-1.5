@@ -2,6 +2,7 @@ class_name WeaponStats
 extends Resource
 
 @export var sprite : SpriteFrames
+@export var sprite_scale : Vector2
 @export var offset : Vector2
 @export var muzzle_offset : Vector2
 

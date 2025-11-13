@@ -1,26 +1,21 @@
 @tool
 extends Node2D
 
-@export var weapon_stats : WeaponStats
+@export var weapon_stats : WeaponStats:
+	set(value):
+		weapon_stats = value
+		call_deferred("update_visuals")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	load_weapon_stats(weapon_stats)
+	update_visuals()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-
-func load_weapon_stats(stats : WeaponStats):
-	var sprite = stats.sprite
-	var sprite_offset = stats.offset
-	
-	var proj_count = stats.proj_count
-	var pierce = stats.pierce
-	var fire_rate = stats.fire_rate
-	var proj_force = stats.proj_force
-	var proj_range = stats.proj_range
-	
-	$AnimatedSprite2D.sprite_frames = sprite
+func update_visuals():
+	$AnimatedSprite2D.sprite_frames = weapon_stats.sprite
+	$AnimatedSprite2D.offset = weapon_stats.offset
+	$Muzzle.position = weapon_stats.muzzle_offset

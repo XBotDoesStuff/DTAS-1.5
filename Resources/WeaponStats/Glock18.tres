@@ -17,6 +17,7 @@ animations = [{
 [resource]
 script = ExtResource("1_ol4di")
 sprite = SubResource("SpriteFrames_5b51p")
+sprite_scale = Vector2(0.1, 0.1)
 proj_count = 1
 proj_force = 1.0
 proj_range = 1000.0
