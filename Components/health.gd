@@ -9,4 +9,4 @@ signal health_changed(diff)
 func set_health(value):
 	var og_health = health
 	health = clamp(health, 0, max_health)
-	var diff = og_health - health
+	var diff = health - og_health
