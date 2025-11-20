@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export_category("Movement")
@@ -7,15 +8,10 @@ extends CharacterBody2D
 var dash_vector
 var is_dashing = false
 
-@export_category("Combat")
-@export var atk_cooldown = 0.1
-var max_hp = 100
-var hp = 100
-
 @export_category("Hunger")
-@export var hunger_drain : float
-var max_hunger
-var hunger
+@export var passive_hunger_drain : float
+@export var max_hunger : float = 100.0
+@onready var hunger = max_hunger
 
 var screen_size
 var mouse_pos
