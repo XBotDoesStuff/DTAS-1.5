@@ -84,6 +84,11 @@ ability={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="enemy_hurtbox"
+2d_physics/layer_2="player_hurtbox"
+
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.8474744, 0.84747446, 0.84747446, 1)

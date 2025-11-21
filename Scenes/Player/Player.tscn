@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://yd4kiqyhmuvt"]
+[gd_scene load_steps=12 format=3 uid="uid://yd4kiqyhmuvt"]
 
 [ext_resource type="Texture2D" uid="uid://b1ma70blcw5y1" path="res://Sprites/Player/Walking/pixil-layer-2.png" id="1_h54ih"]
 [ext_resource type="Script" uid="uid://cyv1wg80hcgnl" path="res://Scripts/player.gd" id="1_ude3g"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://uhp58x87mfji" path="res://Scripts/weapon.gd" id="5_jmcll"]
 [ext_resource type="Resource" uid="uid://bjdj5rfakv2cs" path="res://Resources/WeaponStats/AK47.tres" id="6_4wape"]
 [ext_resource type="Texture2D" uid="uid://dq5ignl0iuwpv" path="res://Sprites/Weapons/ak47.png" id="7_t26db"]
+[ext_resource type="Script" uid="uid://crcf5vhtcn7gk" path="res://Components/health.gd" id="8_fk5o5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l3ax4"]
 size = Vector2(65, 20)
@@ -75,4 +76,9 @@ flip_v = true
 
 [node name="Muzzle" type="Marker2D" parent="Weapon"]
 
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("8_fk5o5")
+metadata/_custom_type_script = "uid://crcf5vhtcn7gk"
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_depleted"]

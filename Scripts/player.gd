@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody2D
 
+signal player_death
+
 @export_category("Movement")
 @export var speed = 800.0
 @export var dash_speed = 2500.0
@@ -55,3 +57,8 @@ func dash():
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
+
+# Health and hunger logic
+func _on_health_depleted() -> void:
+	queue_free()
+	player_death.emit()
