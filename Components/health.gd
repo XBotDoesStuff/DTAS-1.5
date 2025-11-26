@@ -14,3 +14,6 @@ func set_health(value):
 	health_changed.emit(diff)
 	if health == 0:
 		health_depleted.emit()
+
+func take_damage(value):
+	health -= value

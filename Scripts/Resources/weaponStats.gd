@@ -13,7 +13,8 @@ extends Resource
 @export var proj_scene : PackedScene
 @export var proj_count : int
 @export var proj_force : float
-@export var proj_range : float
+@export var proj_ttl : float
+@export var proj_speed : float
 
 @export_category("Stats")
 @export var damage : float

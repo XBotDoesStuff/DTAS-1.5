@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://yd4kiqyhmuvt"]
+[gd_scene load_steps=13 format=3 uid="uid://yd4kiqyhmuvt"]
 
 [ext_resource type="Texture2D" uid="uid://b1ma70blcw5y1" path="res://Sprites/Player/Walking/pixil-layer-2.png" id="1_h54ih"]
 [ext_resource type="Script" uid="uid://cyv1wg80hcgnl" path="res://Scripts/player.gd" id="1_ude3g"]
 [ext_resource type="Texture2D" uid="uid://b03oyivfutyrv" path="res://Sprites/Player/Walking/pixil-layer-0.png" id="2_ude3g"]
 [ext_resource type="Texture2D" uid="uid://caod4ageyp1s" path="res://Sprites/Player/Walking/pixil-layer-1.png" id="3_jmcll"]
 [ext_resource type="Script" uid="uid://uhp58x87mfji" path="res://Scripts/weapon.gd" id="5_jmcll"]
-[ext_resource type="Resource" uid="uid://bjdj5rfakv2cs" path="res://Resources/WeaponStats/AK47.tres" id="6_4wape"]
-[ext_resource type="Texture2D" uid="uid://dq5ignl0iuwpv" path="res://Sprites/Weapons/ak47.png" id="7_t26db"]
+[ext_resource type="Resource" uid="uid://5grpepesfu4i" path="res://Resources/WeaponStats/Glock18.tres" id="6_825xp"]
+[ext_resource type="Texture2D" uid="uid://daowwkard5kje" path="res://Sprites/Weapons/glock18.png" id="7_ji083"]
 [ext_resource type="Script" uid="uid://crcf5vhtcn7gk" path="res://Components/health.gd" id="8_fk5o5"]
+[ext_resource type="Script" uid="uid://baojtsam78t3a" path="res://Components/hurtbox.gd" id="9_825xp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l3ax4"]
 size = Vector2(65, 20)
@@ -32,11 +33,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_fk5o5"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_5b51p"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_t26db")
+"texture": ExtResource("7_ji083")
 }],
 "loop": true,
 "name": &"default",
@@ -66,19 +67,25 @@ one_shot = true
 
 [node name="Weapon" type="Node2D" parent="."]
 script = ExtResource("5_jmcll")
-weapon_stats = ExtResource("6_4wape")
+weapon_stats = ExtResource("6_825xp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Weapon"]
 scale = Vector2(0.1, 0.1)
-sprite_frames = SubResource("SpriteFrames_fk5o5")
-offset = Vector2(250, 200)
+sprite_frames = SubResource("SpriteFrames_5b51p")
+offset = Vector2(200, 200)
 flip_v = true
 
 [node name="Muzzle" type="Marker2D" parent="Weapon"]
+position = Vector2(45, 35)
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("8_fk5o5")
 metadata/_custom_type_script = "uid://crcf5vhtcn7gk"
+
+[node name="Hurtbox" type="Area2D" parent="HealthComponent"]
+script = ExtResource("9_825xp")
+shape = SubResource("RectangleShape2D_l3ax4")
+metadata/_custom_type_script = "uid://baojtsam78t3a"
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="health_depleted" from="HealthComponent" to="." method="_on_health_depleted"]
